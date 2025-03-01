@@ -26,29 +26,17 @@ document.getElementById("playButton").addEventListener("click", () => {
 });
 
 function loadSlide(index) {
-    let slide = slides[index];
+    currentSlide = index; // Mettre à jour l'index de la scène actuelle
 
-    // Charger l'image de fond
-    let bgImage = new Image();
-    bgImage.src = slide.background;
-    bgImage.onload = () => {
-        ctx.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
+    let slide = slides[currentSlide];
 
-        // Charger les personnages
-        slide.characters.forEach(char => {
-            let charImage = new Image();
-            charImage.src = char.image;
-            charImage.onload = () => {
-                ctx.drawImage(charImage, char.position[0], char.position[1]);
-            };
-        });
-    };
-
-    // Jouer la musique
+    // Vérifier si une musique est en cours et l’arrêter
     if (music) {
         music.pause();
         music.currentTime = 0;
     }
+
+    // Charger et jouer la nouvelle musique
     music = new Audio(slide.music);
     music.play().catch(() => {
         console.log("Autoplay bloqué, en attente d'un clic...");
@@ -63,9 +51,13 @@ function loadSlide(index) {
     textIndex = 0;
     showFullText = false;
 
+    // Afficher la scène (background + personnages)
+    redrawScene();
+
     // Démarrer l'affichage progressif du texte
     displayText();
 }
+
 
 // Fonction d'affichage progressif du texte
 function displayText() {
@@ -76,6 +68,37 @@ function displayText() {
         setTimeout(displayText, textSpeed);
     }
 }
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    redrawScene(); // Redessiner l'écran après le resize
+}
+
+// Fonction pour redessiner le background après un resize
+function redrawScene() {
+    if (!slides || !slides[currentSlide]) return;
+
+    let slide = slides[currentSlide];
+    let bgImage = new Image();
+    bgImage.src = slide.background;
+    bgImage.onload = () => {
+        ctx.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
+    };
+
+    // Re-dessiner les personnages (on fixera leur position après)
+    slide.characters.forEach(char => {
+        let charImage = new Image();
+        charImage.src = char.image;
+        charImage.onload = () => {
+            ctx.drawImage(charImage, char.position[0], char.position[1]);
+        };
+    });
+}
+
+// Événement pour redimensionner le canvas
+window.addEventListener("resize", resizeCanvas);
+
 
 // Gérer les clics sur le jeu, mais **pas sur le menu**
 document.addEventListener("click", (event) => {
