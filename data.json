@@ -1,0 +1,32 @@
+{
+    "slides": [
+        {
+            "background": "assets/bg_forest.jpg",
+            "characters": [
+                {
+                    "image": "assets/char1.png",
+                    "position": [300, 400]
+                },
+                {
+                    "image": "assets/char2.png",
+                    "position": [1500, 400]
+                }
+            ],
+            "text": "Bienvenue dans ce monde mystérieuxmystérieuxmystérieuxmystérieuxmystérieuxmystérieuxmystérieuxmystérieuxmystérieuxmystérieuxmystérieuxmystérieuxmystérie uxmystérieuxmystérieuxmystérieuxmystérieuxmystérieuxmystérieuxmystérieuxmystérieuxmystérieuxmystérieuxmystérieuxmystérieuxmystérieuxmystérieuxmystérieuxmystérieuxmystérieuxmystérieuxmystérieuxmystérieuxmystérieuxmystérieuxmystérieuxmystérieuxmystérieuxmystérieuxmystérieuxmystérieuxmystérieuxmystérieuxmystérieuxmystérieux...",
+            "font": "Arial",
+            "music": "assets/theme.mp3"
+        },
+        {
+            "background": "assets/bg_castle.jpg",
+            "characters": [
+                {
+                    "image": "assets/char2.png",
+                    "position": [500, 400]
+                }
+            ],
+            "text": "Un homme étrange vous attend devant le château...",
+            "font": "Arial",
+            "music": "assets/theme.mp3"
+        }
+    ]
+}
